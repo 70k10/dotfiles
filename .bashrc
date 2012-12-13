@@ -1,5 +1,7 @@
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+[ $- != *i* ] && return
+
+[ -f /etc/arch-release ] && alias python='python2'
 
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
@@ -12,8 +14,10 @@ export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 export MANPAGER="less"
+export CHROMIUM_USER_FLAGS="--enable-seccomp-sandbox --purge-memory-button --memory-model=low"
 
 ##Aliases
+alias vi='vim'
 alias cd..='cd ..'
 alias grep='grep --color=auto'
 alias chmox='chmod +x'
@@ -24,6 +28,7 @@ alias upd='layman -S && eix-sync'
 alias less='less -I --LINE-NUMBERS'
 alias gethttpheaders='curl -I'
 #alias windows='sudo aoss qemu-kvm -hda windowsxP.img -net nic,model=rtl8139,macaddr=12:34:56:78:90:14 -net tap -m 768 -localtime -alt-grab -usb -usbdevice tablet -soundhw es1370 &'
+alias urxvt='urxvt -pe default,tabbed -vb'
 
 ##Shell options
 stty -ixon		# disable XON/XOFF flow control (^s/^q)
@@ -38,8 +43,8 @@ HISTFILESIZE=20000
 shopt -s checkhash
 shopt -s cmdhist
 #shopt -s hostcomplete
- # autocomplete ssh commands
-complete -W "$(echo `cat ~/.bash_history | egrep '^ssh ' | sort | uniq | sed 's/^ssh //'`;)" ssh
+# autocomplete ssh commands - doesn't work
+#complete -W "$(echo `cat ~/.bash_history | egrep '^ssh ' | sort | uniq | sed 's/^ssh //'`;)" ssh
 
 
 
@@ -125,3 +130,7 @@ case "$-" in
 esac
 
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#Fix for RVM in Gentoo
+[ -f /etc/gentoo-release ] && unset RUBYOPT
