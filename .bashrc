@@ -123,7 +123,7 @@ case "$-" in
      echo -e "";
      echo -ne "Today is "; date;
      echo -e ""; cal ;
-     echo -ne "Up time:";uptime | awk /'up/ {print $3,$4}';
+     echo -ne "Up time: ";uptime | cut -d' ' -f4,5,6 | sed -e 's/,//g';
      echo "";
      fortune;;
 *)
