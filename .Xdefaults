@@ -1,0 +1,23 @@
+urxvt*transparent: true
+urxvt*shading: 15
+urxvt*scrollBar_right: true
+urxvt*saveLines: 1000
+# Don't scroll to the bottom every time some output is produced.
+urxvt*scrollTtyOutput: false
+# Don't scroll to the bottom when a key is pressed.
+urxvt*scrollTtyKeypress: false
+# Maintain compatability during ssh
+URxvt*termName:xterm
+# Setup tabbing
+URxvt.perl-ext-common: default,tabbed,matcher,-option-popup,-selection-popup,-realine
+URxvt*matcher.button: 1
+# URL launching
+#URxvt.urlLauncher: /usr/bin/firefox
+#URxvt*font:xft:Monospace:pixelsize=13
+# Added from http://www.linuxized.com/2010/08/urxvt-the-unbeatable-terminal/
+URxvt*troughColor:#000000
+URxvt*scrollColor:#222222
+#URxvt*font: xft:Dejavu Sans Mono:pixelsize=11
+URxvt*urgentOnBell: true
+URxvt*background:Black
+URxvt*foreground:White
