@@ -125,7 +125,7 @@ case "$-" in
      echo -e ""; cal ;
      echo -ne "Up time: ";uptime | cut -d' ' -f4,5,6 | sed -e 's/,//g';
      echo "";
-     fortune;;
+     if which fortune &> /dev/null; then fortune;fi;;
 *)
 esac
 
