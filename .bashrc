@@ -45,6 +45,7 @@ shopt -s cmdhist
 #shopt -s hostcomplete
 # autocomplete ssh commands - doesn't work
 #complete -W "$(echo `cat ~/.bash_history | egrep '^ssh ' | sort | uniq | sed 's/^ssh //'`;)" ssh
+#Partial rewrite: egrep '^ssh ' ~/.bash_history  | awk '{print $NF}' | awk -F@ '{print $NF}' | sed -r 's/^[[:punct:]]+.*//g'
 
 
 
@@ -131,6 +132,6 @@ esac
 
 
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 #Fix for RVM in Gentoo
 [ -f /etc/gentoo-release ] && unset RUBYOPT
