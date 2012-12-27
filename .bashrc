@@ -43,9 +43,8 @@ HISTFILESIZE=20000
 shopt -s checkhash
 shopt -s cmdhist
 #shopt -s hostcomplete
-# autocomplete ssh commands - doesn't work
-#complete -W "$(echo `cat ~/.bash_history | egrep '^ssh ' | sort | uniq | sed 's/^ssh //'`;)" ssh
-#Partial rewrite: egrep '^ssh ' ~/.bash_history  | awk '{print $NF}' | awk -F@ '{print $NF}' | sed -r 's/^[[:punct:]]+.*//g'
+# autocomplete ssh hosts
+complete -W "$(echo `cut -d, -f1 ~/.ssh/known_hosts | cut -d' ' -f1 | grep -v '^$'`;)" ssh
 
 
 
