@@ -1,9 +1,6 @@
 # If not running interactively, don't do anything
 [ $- != *i* ] && return
 
-[ -f /etc/arch-release ] && alias python='python2'
-
-alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 # Less Colors for Man Pages
 export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
@@ -17,6 +14,9 @@ export MANPAGER="less"
 export CHROMIUM_USER_FLAGS="--enable-seccomp-sandbox --purge-memory-button --memory-model=low"
 
 ##Aliases
+[ -f /etc/arch-release ] && alias links='elinks'
+[ -f /etc/arch-release ] && alias python='python2'
+alias ls='ls --color=auto'
 alias vi='vim'
 alias cd..='cd ..'
 alias grep='grep --color=auto'
@@ -29,6 +29,9 @@ alias less='less -I --LINE-NUMBERS'
 alias gethttpheaders='curl -I'
 #alias windows='sudo aoss qemu-kvm -hda windowsxP.img -net nic,model=rtl8139,macaddr=12:34:56:78:90:14 -net tap -m 768 -localtime -alt-grab -usb -usbdevice tablet -soundhw es1370 &'
 alias urxvt='urxvt -pe default,tabbed -vb'
+#http://ruslanspivak.com/2010/06/02/urlencode-and-urldecode-from-a-command-line/ with modifications
+alias urlencode='python -c "from sys import argv; from urllib import quote_plus; print quote_plus(argv[1])"'
+alias urldecode='python -c "from sys import argv; from urllib import unquote_plus; print unquote_plus(argv[1])"'
 
 ##Shell options
 stty -ixon		# disable XON/XOFF flow control (^s/^q)
@@ -106,7 +109,7 @@ bu ()
 # usage: define 
 define ()
 {
-  lynx -dump "http://www.google.com/search?hl=en&q=define%3A+${1}&btnG=Google+Search" | grep -m 5 -w "*"  | sed 's/;/ -/g' | cut -d- -f5 > /tmp/templookup.txt
+  links -dump "http://www.google.com/search?hl=en&q=define%3A+${1}&btnG=Google+Search" | grep -m 5 -w "*"  | sed 's/;/ -/g' | cut -d- -f5 > /tmp/templookup.txt
   if [[ -s  /tmp/templookup.txt ]] ;then    
     until ! read response
       do
@@ -123,7 +126,7 @@ case "$-" in
      echo -e "";
      echo -ne "Today is "; date;
      echo -e ""; cal ;
-     echo -ne "Up time: ";uptime | cut -d' ' -f4,5,6 | sed -e 's/,//g';
+     echo -ne "Up time: ";uptime | awk -F \('up'\|\,\) '{print $2}';
      echo "";
      if which fortune &> /dev/null; then fortune;fi;;
 *)
