@@ -11,7 +11,11 @@ export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 export MANPAGER="less"
+
+## Various Exports
 export CHROMIUM_USER_FLAGS="--enable-seccomp-sandbox --purge-memory-button --memory-model=low"
+[ -d ~/lib/python ]  && export PYTHONPATH=..:~/lib/python
+export EDITOR=vim
 
 ##Aliases
 [ -f /etc/arch-release ] && alias links='elinks'
