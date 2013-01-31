@@ -148,7 +148,7 @@ request BLACKLIST_COOKIE name '^__utm.$'
 
 # Set it to certificates store of your distribution, or your own CAfile.
 set ssl_ca_file = /etc/ssl/certs/ca-certificates.crt
-set ssl_verify = 1
+set ssl_verify = 0
 # Command to toggle ssl_verify value:
 @cbind  !ssl = chain 'toggle ssl_verify' 'reload'
 # Example SSL error handler:
@@ -339,13 +339,15 @@ set ebind     = @mode_bind global,-insert
 @bind <Shift><Insert> = sh 'echo "event INJECT_KEYCMD $(xclip -o | sed s/\\\@/%40/g)" > "$UZBL_FIFO"'
 
 # Bookmark inserting binds
-@cbind <Ctrl>m<tags:>_  = sh 'echo "$UZBL_URI $1" >> "$XDG_DATA_HOME"/uzbl/bookmarks' '%s'
+#@cbind <Ctrl>m<tags:>_  = sh 'echo "$UZBL_URI $1" >> "$XDG_DATA_HOME"/uzbl/bookmarks' '%s'
 # Or use a script to insert a bookmark.
-@cbind  M  = spawn @scripts_dir/insert_bookmark.sh
+#@cbind  M  = spawn @scripts_dir/insert_bookmark.sh
+@cbind  M  = sh 'curl -s -d username=$(cat ~/.config/uzbl/instapaper | sed -n '1p') -d password=$(cat ~/.config/uzbl/instapaper | sed -n '2p') -d url=$UZBL_URI https://www.instapaper.com/api/add > /dev/null'
+
 
 # Bookmark/history loading
-@cbind  U  = spawn @scripts_dir/load_url_from_history.sh
-@cbind  u  = spawn @scripts_dir/load_url_from_bookmarks.sh
+#@cbind  U  = spawn @scripts_dir/load_url_from_history.sh
+#@cbind  u  = spawn @scripts_dir/load_url_from_bookmarks.sh
 
 # Temporary bookmarks
 @cbind  <Ctrl>d  = spawn @scripts_dir/insert_temp.sh
@@ -468,5 +470,8 @@ sync_spawn_exec @scripts_dir/load_cookies.sh @data_home/uzbl/session-cookies.txt
 
 # Set the "home" page.
 set uri = uzbl.org/doesitwork/@COMMIT
+
+# Set preference variables
+set enable_java_applet = 0
 
 # vim: set fdm=syntax:

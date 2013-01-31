@@ -36,6 +36,7 @@ alias urxvt='urxvt -pe default,tabbed -vb'
 #http://ruslanspivak.com/2010/06/02/urlencode-and-urldecode-from-a-command-line/ with modifications
 alias urlencode='python -c "from sys import argv; from urllib import quote_plus; print quote_plus(argv[1])"'
 alias urldecode='python -c "from sys import argv; from urllib import unquote_plus; print unquote_plus(argv[1])"'
+alias evernote='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Evernote/Evernote/Evernote.exe'
 
 ##Shell options
 stty -ixon		# disable XON/XOFF flow control (^s/^q)
