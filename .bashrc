@@ -51,9 +51,6 @@ HISTFILESIZE=20000
 shopt -s checkhash
 shopt -s cmdhist
 #shopt -s hostcomplete
-# autocomplete ssh hosts
-complete -W "$(echo `cut -d, -f1 ~/.ssh/known_hosts | cut -d' ' -f1 | grep -v '^$'`;)" ssh
-
 
 
 ##functions
@@ -96,6 +93,13 @@ xkcd ()
     display <(wget -q http://dynamic.xkcd.com/comic/random/ -O - | grep -Eo http://imgs.xkcd.com/comics/.*png | wget -q -i - -O -)
 }
 
+tree () {
+        if [ $# -eq 0 ] ; then
+                find . -print | sed 's;[^/]*/;|___;g;s;___|; |;g'
+        else
+                find $1 -print | sed 's;[^/]*/;|___;g;s;___|; |;g'
+        fi 
+}
 
 # backup 
 #################
