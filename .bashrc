@@ -51,9 +51,28 @@ HISTFILESIZE=20000
 shopt -s checkhash
 shopt -s cmdhist
 #shopt -s hostcomplete
+# autocomplete ssh hosts
+#complete -W "$(echo `cut -d, -f1 ~/.ssh/known_hosts | cut -d' ' -f1 | grep -v '^$'`;)" ssh
+#### In progress host autocomplete - TODO: Create bash function for this, replace root w/ w/e is on CLI, if no user then also test for lines matching explicit name in history
+#### Also do a compare between host output and known_hosts to reduce issues w/ mispelled hosts in history, make sed piece strip out ssh args
+#### Make ipv6 address compliant
+# sed -e 's/ssh [a-z0-9]\+\@\([_.a-z0-9]\+\)/\1/' <(egrep -Z '^ssh.*root\@[_.a-z0-9]+$' .bash_history) | sort | uniq
+# sed -e 's/ssh \+\(.*\@\)\?\([_.a-z0-9]\+\)$/\2/' <(egrep -Z '^ssh.*root\@[_.a-z0-9]+$' .bash_history) | sort | uniq
+
 
 
 ##functions
+
+#Bash autocomplete ssh host function
+#autohost () {
+#    if [[ ${COMP_LINE} == *@* ]]; then
+#        #pull out the user from before the @
+#        local PARSEDUSER=$(sed -e 's/ssh.* \([-_a-z0-9]\+\)\@.*/\1/' <(${COMP_LINE}))
+#        if [[ $PARSEDUSER == $USER ]]; then
+#            althostlist=$(
+#        #generate a hostlist with the username
+#        local hostlist=$(sed -e 's/ssh \+\(.*\@\)\?\([_.a-z0-9]\+\)$/\2/' <(egrep -Z '^ssh.*${PARSEDUSER}\@[_.a-z0-9]+$' ~/.bash_history) | sort | uniq)
+
 ext () {
 	if [ -f $1 ] ; then
 		case $1 in
@@ -93,13 +112,6 @@ xkcd ()
     display <(wget -q http://dynamic.xkcd.com/comic/random/ -O - | grep -Eo http://imgs.xkcd.com/comics/.*png | wget -q -i - -O -)
 }
 
-tree () {
-        if [ $# -eq 0 ] ; then
-                find . -print | sed 's;[^/]*/;|___;g;s;___|; |;g'
-        else
-                find $1 -print | sed 's;[^/]*/;|___;g;s;___|; |;g'
-        fi 
-}
 
 # backup 
 #################
