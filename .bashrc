@@ -31,6 +31,7 @@ alias eix='eix -SA --force-color'
 alias upd='layman -S && eix-sync'
 alias less='less -I --LINE-NUMBERS'
 alias gethttpheaders='curl -I'
+alias ntail='tail -f `ls -r1 | tail -n1`'
 #alias windows='sudo aoss qemu-kvm -hda windowsxP.img -net nic,model=rtl8139,macaddr=12:34:56:78:90:14 -net tap -m 768 -localtime -alt-grab -usb -usbdevice tablet -soundhw es1370 &'
 alias urxvt='urxvt -pe default,tabbed -vb'
 #http://ruslanspivak.com/2010/06/02/urlencode-and-urldecode-from-a-command-line/ with modifications
