@@ -79,7 +79,7 @@ bindsym $mod+e layout toggle split
 
 ############## Custom
 # lock screen
-bindsym $mod+Alt+l exec --no-startup-id i3lock
+bindsym $mod+Mod1+l exec --no-startup-id i3lock
 
 # MPD controls
 bindsym $mod+b exec --no-startup-id "mpc -q next"
@@ -98,10 +98,10 @@ bindsym $mod+Shift+t move scratchpad
 bindsym $mod+t scratchpad show
 
 # move around workspaces
-#bindsym $mod+Left workspace prev_on_output
-#bindsym $mod+Down workspace next
-#bindsym $mod+Up workspace prev
-#bindsym $mod+Right workspace next_on_output
+bindsym $mod+Left workspace prev_on_output
+bindsym $mod+Down workspace next
+bindsym $mod+Up workspace prev
+bindsym $mod+Right workspace next_on_output
 ##############
 
 # toggle tiling / floating
