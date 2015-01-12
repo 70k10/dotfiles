@@ -36,3 +36,4 @@ autocmd Filetype python set expandtab
 autocmd Filetype python set softtabstop=4
 
 :filetype plugin on
+call pathogen#infect() 

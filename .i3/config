@@ -82,11 +82,11 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Mod1+l exec --no-startup-id i3lock
 
 # MPD controls
-bindsym $mod+b exec --no-startup-id "mpc -q next"
+bindsym $mod+b exec --no-startup-id "mpc -h /var/lib/mpd/socket -q next"
 bindsym $mod+v exec --no-startup-id "~/repos/scripts/mpcdmenu.sh"
-bindsym $mod+z exec --no-startup-id "mpc -q prev"
-bindsym $mod+x exec --no-startup-id "mpc -q stop"
-bindsym $mod+c exec --no-startup-id "mpc -q toggle"
+bindsym $mod+z exec --no-startup-id "mpc -h /var/lib/mpd/socket -q prev"
+bindsym $mod+x exec --no-startup-id "mpc -h /var/lib/mpd/socket -q stop"
+bindsym $mod+c exec --no-startup-id "mpc -h /var/lib/mpd/socket -q toggle"
 
 # Scratchpad
 # Startup stuff
